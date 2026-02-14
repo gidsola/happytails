@@ -14,32 +14,30 @@ import rateLimit from './middlewares/rateLimiter.js'
 import routeMaster from './routes/routeMaster.js';
 import serverListener from './listener.js';
 
-//this needs to get tidied
 const
-    PORT = process.env.PORT || 3000,
-    BASE_URL = process.env.NODE_ENV === 'production'
-        ? process.env.CLOUD_URL
-        : `http://localhost:` + PORT,
-
     mongoUri = process.env.NODE_ENV === 'production'
-        ? process.env.MONGO_URI    // Cloud server (Live)
-        : process.env.MONGO_LOCAL, // Local server (Dev)
+        ? process.env.MONGO_PROD    // Cloud server (Live)
+        : process.env.MONGO_DEV, // Local server (Dev)
 
     app = express();
 
 //MONGO_DB Connection
-try {
-    await mongoose.connect(mongoUri);
-    console.log('Connected to MongoDB successfully!')
+// bypass for testing without mongo installed.
+const hasMongo = false;
+if (hasMongo) {
+    try {
+        await mongoose.connect(mongoUri);
+        console.log('Connected to MongoDB successfully!')
+    }
+    catch (err) {
+        console.error('MongoDB connection error:', err);
+    };
 }
-catch (err) {
-    console.error('MongoDB connection error:', err);
-};
 
 app
     .use(cors(
         {
-            origin: process.env.CLIENT_URL,
+            origin: process.env.DOMAIN,
             credentials: true
         }
     ))
@@ -61,4 +59,4 @@ app
     .get(/^(?!\/api).*/, rateLimit/*, metadata*/);
 
 await routeMaster(app);
-await serverListener(app, PORT, BASE_URL);
+await serverListener(app);

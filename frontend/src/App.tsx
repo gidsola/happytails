@@ -2,10 +2,14 @@
 import './App.css';
 
 export default function App() {
+
+  // this page isn't a great example for typescript so I did this simple one.
+  const title: string = "Happy Tails";
+
   return (
     <div className="App">
       <header className="header">
-        <h1>Welcome to Happy Tails</h1>
+        <h1>Welcome to {title}</h1>
         <p>A unified platform for pet care and adoption</p>
       </header>
 
@@ -33,7 +37,7 @@ export default function App() {
       </main>
 
       <footer className="footer">
-        <p>© 2026 Happy Tails. All rights reserved.</p>
+        <p>© 2026 {title}. All rights reserved.</p>
       </footer>
     </div>
   );

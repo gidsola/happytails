@@ -1,6 +1,6 @@
 
 import 'dotenv/config';
-// import { STATIC_ASSETS } from '../../enum/SERVER_ENUMS.js';
+import { STATIC_ASSETS } from '../../enum/SERVER_ENUMS.js';
 
 import mongoose from 'mongoose';
 import express from 'express';
@@ -46,6 +46,7 @@ app
     .use(express.json({ limit: '10mb' }))
     .use(express.urlencoded({ limit: '10mb', extended: true }))
     .use(helmet())
+    .use(express.static(STATIC_ASSETS()))
 
     .use((err, _req, res, _next) => {
         if (err.name === 'UnauthorizedError') {

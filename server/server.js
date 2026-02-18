@@ -1,6 +1,6 @@
 
 import 'dotenv/config';
-import { STATIC_ASSETS } from '../enum/SERVER_ENUMS.js';
+import { STATIC_ASSETS } from '../enums/SERVER_ENUMS.js';
 
 import mongoose from 'mongoose';
 import express from 'express';

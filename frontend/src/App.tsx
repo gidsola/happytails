@@ -1,6 +1,6 @@
 
 /* import React from 'react'; */ // importing full React to access React.JSX.Element type
-import { JSX } from 'react'; // importing only JSX type for better performance and to avoid importing the entire React library
+import type { JSX } from 'react'; // importing only JSX type for better performance and to avoid importing the entire React library
 import './App.css';
 
 // export default function App(): React.JSX.Element {
